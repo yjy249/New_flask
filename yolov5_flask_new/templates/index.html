@@ -1,0 +1,126 @@
+<html>
+  <head>
+    <title>高速公路异物检测系统</title>
+<style>
+      /* Reset CSS */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: Arial, sans-serif;
+      }
+      /* Header */
+      #header {
+        background-color: #333;
+        color: #fff;
+        text-align: center;
+        padding: 20px;
+      }
+      #header h1 {
+        font-size: 36px;
+        margin-top: 0;
+      }
+      /* Content */
+      #content {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 10px;
+        background-color: #f0f0f0;
+      }
+      #content h2 {
+        font-size: 24px;
+        margin-top: 20px;
+        margin-bottom: 10px;
+      }
+      #content p {
+        font-size: 18px;
+        line-height: 1.5;
+        margin-bottom: 20px;
+      }
+      /* Form */
+      form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      label {
+        font-size: 18px;
+        display: block;
+        margin-bottom: 10px;
+        text-align: center;
+      }
+      input[type="file"] {
+        margin-bottom: 20px;
+      }
+      button[type="button"] {
+        padding: 10px;
+        font-size: 18px;
+        background-color: #333;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.2s ease-in-out;
+      }
+      button[type="button"]:hover {
+        background-color: #555;
+      }
+      /* Preview */
+      #preview {
+        position: relative; /* Add relative positioning */
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        height: 400px;
+        border: 1px solid #333;
+        border-radius: 5px;
+      }
+      #preview img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+      }
+      #time {
+        position: absolute; /* Add absolute positioning */
+        bottom: 10px;
+        right: 10px;
+        font-size: 20px;
+        color: #000000;
+}
+ </style>
+  </head>
+  <body>
+    <div id="header">
+      <h1>高速公路检测系统</h1>
+    </div>
+    <div id="content">
+      <h2>上传图片或视频</h2>
+      <p>请上传高速公路上发现的异物、桩号及裂纹的图片或视频，并在下方预览。</p>
+        <form action="/video" enctype='multipart/form-data' method='POST'>
+        <input type="file" name="file">
+        <input type="submit" value="检测">
+        </form>
+      <div id="preview">
+        <img src="{{ url_for('video_feed') }}" alt="">
+        <div id="time"></div>
+      </div>
+
+    </div>
+
+  </body>
+</html>
+<script>
+function updateTime() {
+  var now = new Date();
+  var hours = now.getHours();
+  var minutes = now.getMinutes();
+  var seconds = now.getSeconds();
+  var timeString = hours + ':' + minutes + ':' + seconds;
+  document.getElementById('time').innerHTML = timeString;
+}
+setInterval(updateTime, 1000);
+</script>
